@@ -15,6 +15,7 @@ const enableGlobalErrorLogging =
 // create the Express app
 const app = express();
 app.use(cors());
+app.disable("etag");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
