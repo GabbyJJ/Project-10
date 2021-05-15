@@ -1,10 +1,5 @@
-import React, { Component, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Courses from "./components/Courses";
 import CreateCourse from "./components/CreateCourse";
@@ -18,14 +13,14 @@ import PrivateRoutes from "./components/PrivateRoutes";
 const App = () => {
   return (
     <Router>
-      <Route path="/" component={Courses} />
-      <Route path="/courses/:id" component={CourseDetail} />
-      <Route path="/signin" component={UserSignIn} />
-      <Route path="/signup" component={UserSignUp} />
-      <Route path="/signout" component={UserSignOut} />
+      <Route exact path="/" component={Courses} />
+      <Route exact path="/courses/:id" component={CourseDetail} />
+      <Route exact path="/signin" component={UserSignIn} />
+      <Route exact path="/signup" component={UserSignUp} />
+      <Route exact path="/signout" component={UserSignOut} />
       <PrivateRoutes>
-        <Route path="/courses/create" component={CreateCourse} />
-        <Route path="/courses/update" component={UpdateCourse} />
+        <Route exact path="/courses/create" component={CreateCourse} />
+        <Route exact path="/courses/:id/update" component={UpdateCourse} />
       </PrivateRoutes>
     </Router>
   );

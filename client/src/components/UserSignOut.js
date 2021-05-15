@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
+import React from "react";
+import { Redirect } from "react-router-dom";
 
-class UserSignOut extends Component {
-  render() {
-    return "";
-  }
-}
+const UserSignOut = () => {
+  localStorage.setItem("user", null);
+  return <Redirect to={"/"} />;
+};
 
 export default UserSignOut;
