@@ -8,11 +8,7 @@ const UpdateCourse = () => {
   let history = useHistory();
   let user = JSON.parse(localStorage.getItem("user"));
   let [updateCourseData, setUpdateCourseData] = React.useState("");
-  let [updateCourseDescription, setUpdateCourseDescription] =
-    React.useState("");
-  let [updateCourseTitle, setUpdateCourseTitle] = React.useState("");
-  let [updateMaterialsNeeded, setUpdateMaterialsNeeded] = React.useState("");
-  let [updateEstimatedTime, setUpdateEstimatedTime] = React.useState("");
+
   //let [course, setCourse] = React.useState(null);
 
   React.useEffect(() => {
@@ -43,8 +39,8 @@ const UpdateCourse = () => {
       return alert("You must be signed in to update a course");
     }
 
-    fetch(`http://localhost:5000/api/courses/${id}`, {
-      method: "POST",
+    fetch(`http://localhost:5000/api/courses/${id}/update`, {
+      method: "PUT",
       mode: "cors",
       cache: "no-cache",
       headers: {
@@ -52,7 +48,7 @@ const UpdateCourse = () => {
         "Content-Type": "application/json",
       },
     })
-      .then((UpdateCourse) => {
+      .then(() => {
         history.push("/");
       })
       .catch((error) => {
@@ -70,38 +66,37 @@ const UpdateCourse = () => {
               <h2>Update Course</h2>
               <form
                 onSubmit={(e) => {
-                  updateCourseData(e);
+                  updateData(e);
                 }}
               >
                 <div class="main--flex">
                   <div>
-                    <label for="courseTitle">{updateCourseData.title}</label>
+                    <label for="courseTitle">Title</label>
                     <input
                       id="courseTitle"
                       name="courseTitle"
                       type="text"
-                      value={updateCourseTitle}
+                      value={updateCourseData.title}
                       onChange={(e) => {
-                        setUpdateCourseTitle(e.target.value);
+                        setUpdateCourseData({
+                          title: e.target.value,
+                        });
                       }}
                     />
 
                     <p>
-                      By
-                      {user.firstName} {user.lastName}
+                      By {user.firstName} {user.lastName}
                     </p>
-
-                    <ReactMarkdown
-                      children={updateCourseData.updateCourseDescription}
-                    />
 
                     <label for="courseDescription">Course Description</label>
                     <textarea
                       id="courseDescription"
                       name="courseDescription"
-                      value={updateCourseDescription}
+                      value={updateCourseData.description}
                       onChange={(e) => {
-                        setUpdateCourseDescription(e.target.value);
+                        setUpdateCourseData({
+                          description: e.target.value,
+                        });
                       }}
                     ></textarea>
                   </div>
@@ -111,9 +106,11 @@ const UpdateCourse = () => {
                       id="estimatedTime"
                       name="estimatedTime"
                       type="text"
-                      value={updateEstimatedTime}
+                      value={updateCourseData.estimatedTime}
                       onChange={(e) => {
-                        setUpdateEstimatedTime(e.target.value);
+                        setUpdateCourseData({
+                          estimatedTime: e.target.value,
+                        });
                       }}
                     />
 
@@ -121,9 +118,11 @@ const UpdateCourse = () => {
                     <textarea
                       id="materialsNeeded"
                       name="materialsNeeded"
-                      value={updateMaterialsNeeded}
+                      value={updateCourseData.materialsNeeded}
                       onChange={(e) => {
-                        setUpdateMaterialsNeeded(e.target.value);
+                        setUpdateCourseData({
+                          materialsNeeded: e.target.value,
+                        });
                       }}
                     ></textarea>
                   </div>
