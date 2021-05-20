@@ -104,13 +104,15 @@ const CourseDetail = () => {
                   </p>
 
                   <h3 class="course--detail--title">Materials Needed</h3>
-                  {course.materialsNeeded ? (
-                    <ul class="course--detail--list">
-                      <ReactMarkdown children={course.materialsNeeded} />{" "}
-                    </ul>
-                  ) : (
-                    "No Materials Required"
-                  )}
+                  <p>
+                    {course.materialsNeeded ? (
+                      <ul class="course--detail--list">
+                        <ReactMarkdown children={course.materialsNeeded} />{" "}
+                      </ul>
+                    ) : (
+                      "No Materials Required"
+                    )}
+                  </p>
                 </div>
               </div>
             </form>
