@@ -1,6 +1,6 @@
 const auth = require("basic-auth");
 const bcrypt = require("bcryptjs");
-const { Users } = require("../models");
+const { User } = require("../models");
 
 //This will authenticate the user by email
 exports.authenticateUser = async (req, res, next) => {
@@ -10,7 +10,7 @@ exports.authenticateUser = async (req, res, next) => {
 
   // This will authenticate the User by email address.
   if (credentials) {
-    let user = await Users.findOne({
+    let user = await User.findOne({
       where: { emailAddress: credentials.name },
     });
     if (user) {
