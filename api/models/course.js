@@ -3,8 +3,8 @@ const { Model, DataTypes } = require("sequelize");
 const models = require("./index");
 
 module.exports = (sequelize) => {
-  class Courses extends Model {}
-  Courses.init(
+  class Course extends Model {}
+  Course.init(
     {
       title: {
         type: DataTypes.STRING,
@@ -40,10 +40,10 @@ module.exports = (sequelize) => {
         type: DataTypes.NUMBER,
       },
     },
-    { sequelize, modelName: "Courses" }
+    { sequelize, modelName: "Course" }
   ),
-    (Courses.associate = (models) => {
-      Courses.belongsTo(models.Users, { foreignKey: "userId" });
+    (Course.associate = (models) => {
+      Course.belongsTo(models.User, { foreignKey: "userId" });
     });
-  return Courses;
+  return Course;
 };

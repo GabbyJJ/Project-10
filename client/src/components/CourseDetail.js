@@ -99,7 +99,7 @@ const CourseDetail = () => {
                   <h3 class="course--detail--title">Estimated Time</h3>
                   <p>
                     {course.estimatedTime
-                      ? course.estimatedTimed
+                      ? course.estimatedTime
                       : "Estimated Time Not Provided"}
                   </p>
 
@@ -124,3 +124,33 @@ const CourseDetail = () => {
 };
 
 export default CourseDetail;
+
+<div class="main--flex">
+  <div>
+    <h3 class="course--detail--title">Course</h3>
+    <h4 class="course--name">{course.title}</h4>
+    <p>
+      By {course.User.firstName} {course.User.lastName}
+    </p>
+    <ReactMarkdown children={course.description} />
+  </div>
+  <div>
+    <h3 class="course--detail--title">Estimated Time</h3>
+    <p>
+      {course.estimatedTime
+        ? course.estimatedTime
+        : "Estimated Time Not Provided"}
+    </p>
+
+    <h3 class="course--detail--title">Materials Needed</h3>
+    <p>
+      {course.materialsNeeded ? (
+        <ul class="course--detail--list">
+          <ReactMarkdown children={course.materialsNeeded} />{" "}
+        </ul>
+      ) : (
+        "No Materials Required"
+      )}
+    </p>
+  </div>
+</div>;

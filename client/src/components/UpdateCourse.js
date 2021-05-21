@@ -1,8 +1,7 @@
 import React from "react";
 import Header from "./Header";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-const ReactMarkdown = require("react-markdown");
 const UpdateCourse = () => {
   let { id } = useParams();
   let history = useHistory();
@@ -34,12 +33,13 @@ const UpdateCourse = () => {
       });
   }, [id]);
 
-  const updateData = () => {
+  const updateData = (e) => {
+    e.preventDefault();
     if (!user) {
       return alert("You must be signed in to update a course");
     }
 
-    fetch(`http://localhost:5000/api/courses/${id}/update`, {
+    fetch(`http://localhost:5000/api/courses/${id}`, {
       method: "PUT",
       mode: "cors",
       cache: "no-cache",
@@ -47,9 +47,10 @@ const UpdateCourse = () => {
         Authorization: "Basic " + btoa(`${user.email}:${user.password}`),
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(updateCourseData),
     })
       .then(() => {
-        history.push("/");
+        history.push(`/courses/${id}`);
       })
       .catch((error) => {
         console.log(error);
@@ -79,13 +80,14 @@ const UpdateCourse = () => {
                       value={updateCourseData.title}
                       onChange={(e) => {
                         setUpdateCourseData({
+                          ...updateCourseData,
                           title: e.target.value,
                         });
                       }}
                     />
-
                     <p>
-                      By {user.firstName} {user.lastName}
+                      By {updateCourseData.User.firstName}{" "}
+                      {updateCourseData.User.lastName}
                     </p>
 
                     <label for="courseDescription">Course Description</label>
@@ -95,6 +97,7 @@ const UpdateCourse = () => {
                       value={updateCourseData.description}
                       onChange={(e) => {
                         setUpdateCourseData({
+                          ...updateCourseData,
                           description: e.target.value,
                         });
                       }}
@@ -109,6 +112,7 @@ const UpdateCourse = () => {
                       value={updateCourseData.estimatedTime}
                       onChange={(e) => {
                         setUpdateCourseData({
+                          ...updateCourseData,
                           estimatedTime: e.target.value,
                         });
                       }}
@@ -121,18 +125,14 @@ const UpdateCourse = () => {
                       value={updateCourseData.materialsNeeded}
                       onChange={(e) => {
                         setUpdateCourseData({
+                          ...updateCourseData,
                           materialsNeeded: e.target.value,
                         });
                       }}
                     ></textarea>
                   </div>
                 </div>
-                <button
-                  class="button"
-                  onClick={() => {
-                    updateCourseData();
-                  }}
-                >
+                <button class="button" type="submit">
                   Update Course
                 </button>
                 <button

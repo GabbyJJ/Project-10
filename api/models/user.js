@@ -4,8 +4,8 @@ const bcrypt = require("bcryptjs");
 const models = require("./index");
 
 module.exports = (sequelize) => {
-  class Users extends Model {}
-  Users.init(
+  class User extends Model {}
+  User.init(
     {
       firstName: {
         type: DataTypes.STRING,
@@ -51,11 +51,11 @@ module.exports = (sequelize) => {
           (user.password = await bcrypt.hash(user.password, 10)),
       },
       sequelize,
-      modelName: "Users",
+      modelName: "User",
     }
   ),
-    (Users.associate = (models) => {
-      Users.hasMany(models.Courses, { foreignKey: "userId" });
+    (User.associate = (models) => {
+      User.hasMany(models.Course, { foreignKey: "userId" });
     });
-  return Users;
+  return User;
 };

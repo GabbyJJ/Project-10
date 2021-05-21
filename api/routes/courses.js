@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { Courses, Users } = require("../models");
+const { Course } = require("../models");
 const { authenticateUser } = require("../middleware/auth-users");
 
 router.get("/", (req, res) => {
-  Courses.findAll({
+  Course.findAll({
     include: [
       {
         model: Users,
@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  Courses.findOne({
+  Course.findOne({
     where: { id: req.params.id },
     include: [
       {
@@ -43,7 +43,7 @@ router.get("/:id", (req, res) => {
 
 router.post("/", authenticateUser, (req, res) => {
   console.log(req.body);
-  Courses.create(req.body)
+  Course.create(req.body)
     .then((course) => {
       res.status(201).json(course).end();
     })
@@ -55,12 +55,12 @@ router.post("/", authenticateUser, (req, res) => {
 });
 
 router.put("/:id", authenticateUser, function (req, res, next) {
-  if (!req.body.title || !req.body.userId) {
+  if (!req.body.title || !req.body.description) {
     res.status(400);
     res.json({ error: "you must supply a title or user" });
     return;
   }
-  Courses.findByPk(req.params.id)
+  Course.findByPk(req.params.id)
     .then(function (course) {
       course
         .update(req.body)
@@ -81,7 +81,7 @@ router.put("/:id", authenticateUser, function (req, res, next) {
 
 //delete course
 router.delete("/:id", authenticateUser, function (req, res, next) {
-  Courses.findByPk(req.params.id)
+  Course.findByPk(req.params.id)
     .then((course) => {
       course.destroy();
       res.status(204).end();
