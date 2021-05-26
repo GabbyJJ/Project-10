@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { Course } = require("../models");
+const { Course, User } = require("../models");
 const { authenticateUser } = require("../middleware/auth-users");
 
 router.get("/", (req, res) => {
   Course.findAll({
     include: [
       {
-        model: Users,
+        model: User,
       },
     ],
   })
@@ -27,7 +27,7 @@ router.get("/:id", (req, res) => {
     where: { id: req.params.id },
     include: [
       {
-        model: Users,
+        model: User,
       },
     ],
   })

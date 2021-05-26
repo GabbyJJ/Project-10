@@ -15,7 +15,6 @@ const Courses = () => {
       mode: "cors",
       cache: "no-cache",
       headers: {
-        Authorization: "Basic " + btoa("john@smith.com:password"),
         "Content-Type": "application/json",
       },
     })
@@ -39,6 +38,7 @@ const Courses = () => {
       <main>
         <div class="wrap main--grid">
           {courses &&
+            courses.length &&
             courses.map((course, index) => {
               return (
                 <Link

@@ -21,6 +21,7 @@ router.post("/", (req, res) => {
   const user = req.body;
 
   User.create(req.body)
+    .then(res.location("/"))
     .then((userInfo) => {
       res.status(201).json(userInfo);
       res.end();
