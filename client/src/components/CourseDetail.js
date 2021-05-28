@@ -3,6 +3,9 @@ import { Link, useParams, useHistory } from "react-router-dom";
 
 import Header from "./Header";
 const ReactMarkdown = require("react-markdown");
+
+//Get course details and fetch api
+
 const CourseDetail = () => {
   let { id } = useParams();
   let history = useHistory();
@@ -53,7 +56,7 @@ const CourseDetail = () => {
         console.log(error);
       });
   };
-
+  //This will link to the update course page and this also activates the delete button.
   return (
     <div id="root">
       <Header />

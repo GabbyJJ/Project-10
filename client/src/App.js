@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+//import routes
+
 import Courses from "./components/Courses";
 import CreateCourse from "./components/CreateCourse";
 import UpdateCourse from "./components/UpdateCourse";
@@ -9,6 +11,8 @@ import UserSignIn from "./components/UserSignIn";
 import UserSignUp from "./components/UserSignUp";
 import UserSignOut from "./components/UserSignOut";
 import PrivateRoutes from "./components/PrivateRoutes";
+
+//Set exact paths
 
 const App = () => {
   return (

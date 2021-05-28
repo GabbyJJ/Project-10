@@ -8,8 +8,6 @@ const UpdateCourse = () => {
   let user = JSON.parse(localStorage.getItem("user"));
   let [updateCourseData, setUpdateCourseData] = React.useState("");
 
-  //let [course, setCourse] = React.useState(null);
-
   React.useEffect(() => {
     fetch(`http://localhost:5000/api/courses/${id}`, {
       method: "GET",
