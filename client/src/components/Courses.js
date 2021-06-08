@@ -2,6 +2,8 @@ import React from "react";
 import Header from "./Header";
 import { Link } from "react-router-dom";
 
+//This variable is to set the courses and fetch the api
+
 const Courses = () => {
   let [courses, setCourses] = React.useState(null);
   // useEffect allows us to run things when the component is loaded into the DOM

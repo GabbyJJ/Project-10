@@ -41,7 +41,9 @@ const UserSignUp = () => {
         console.log(res);
         return res.json();
       })
-      // if succesfull persist user and push user to index page
+
+      // if successfull persist user and push user to index page
+
       .then((userData) => {
         localStorage.setItem(
           "user",

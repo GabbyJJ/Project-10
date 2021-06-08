@@ -11,6 +11,8 @@ const CreateCourse = () => {
   let [estimatedTime, setEstimatedTime] = React.useState("");
   let [materialsNeeded, setMaterialsNeeded] = React.useState("");
 
+  //This is the variable to create the course and fetch the api
+
   const createCourseData = (e) => {
     e.preventDefault();
     setErrors(null);
