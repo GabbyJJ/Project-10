@@ -63,19 +63,23 @@ const CourseDetail = () => {
       <main>
         <div class="actions--bar">
           <div class="wrap">
-            {user && (
+            {user && course && (
               <>
-                <Link to={`/courses/${id}/update`} class="button">
-                  Update Course
-                </Link>
-                <button
-                  class="button"
-                  onClick={() => {
-                    deleteCourse();
-                  }}
-                >
-                  Delete Course
-                </button>
+                {user.id === course.User.id && (
+                  <>
+                    <Link to={`/courses/${id}/update`} class="button">
+                      Update Course
+                    </Link>
+                    <button
+                      class="button"
+                      onClick={() => {
+                        deleteCourse();
+                      }}
+                    >
+                      Delete Course
+                    </button>
+                  </>
+                )}
               </>
             )}
 

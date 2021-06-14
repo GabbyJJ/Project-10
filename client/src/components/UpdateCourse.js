@@ -84,8 +84,7 @@ const UpdateCourse = () => {
                       }}
                     />
                     <p>
-                      By {updateCourseData.User.firstName}{" "}
-                      {updateCourseData.User.lastName}
+                      By {user.firstName} {user.lastName}
                     </p>
 
                     <label for="courseDescription">Course Description</label>

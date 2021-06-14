@@ -8,6 +8,8 @@ const UserSignIn = () => {
   let [email, setEmail] = React.useState("");
   let [password, setPassword] = React.useState("");
 
+  // If the user has not filled out all fields they will get an error.
+
   const signIn = (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -71,6 +73,7 @@ const UserSignIn = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button class="button" type="submit">
+              {/* On submit the user will be signed in and the information will be pushed to the database */}
               Sign In
             </button>
             <button

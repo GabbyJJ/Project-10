@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
 //import routes
 
@@ -26,6 +26,7 @@ const App = () => {
         <Route exact path="/courses/create" component={CreateCourse} />
         <Route exact path="/courses/:id/update" component={UpdateCourse} />
       </PrivateRoutes>
+      <Redirect from="*" to="/" />
     </Router>
   );
 };
