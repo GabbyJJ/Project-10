@@ -1,17 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+//This is the variable to set my Header
+
 const Header = () => {
   let user = JSON.parse(localStorage.getItem("user"));
   return (
     <header>
-      <div class="wrap header--flex">
-        <h1 class="header--logo">
+      <div className="wrap header--flex">
+        <h1 className="header--logo">
           <a href="index.html">Courses</a>
         </h1>
         {user ? (
           <nav>
-            <ul class="header--signedin">
+            <ul className="header--signedin">
               <li>
                 Welcome, {user.firstName} {user.lastName}!
               </li>
@@ -22,7 +24,7 @@ const Header = () => {
           </nav>
         ) : (
           <nav>
-            <ul class="header--signedout">
+            <ul className="header--signedout">
               <li>
                 <Link to="/signup">Sign Up</Link>
               </li>

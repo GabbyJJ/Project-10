@@ -67,7 +67,7 @@ const UserSignUp = () => {
     <div id="root">
       <Header />
       <main>
-        <div class="form--centered">
+        <div className="form--centered">
           <h2>Sign Up</h2>
 
           <form
@@ -75,56 +75,57 @@ const UserSignUp = () => {
               signUp(e);
             }}
           >
-            <label for="firstName">First Name</label>
+            <label htmlFor="firstName">First Name</label>
             <input
               id="firstName"
               name="firstName"
               type="text"
-              requried
+              requried={true}
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
-            <label for="lastName">Last Name</label>
+            <label htmlFor="lastName">Last Name</label>
             <input
               id="lastName"
               name="lastName"
               type="text"
-              requried
+              requried={true}
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
-            <label for="emailAddress">Email Address</label>
+            <label htmlFor="emailAddress">Email Address</label>
             <input
               id="emailAddress"
               name="emailAddress"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              requried
+              requried={true}
             />
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
+              minLength="6"
               id="password"
-              requried
+              requried={true}
               name="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <label for="confirmPassword">Confirm Password</label>
+            <label htmlFor="confirmPassword">Confirm Password</label>
             <input
               id="confirmPassword"
               name="confirmPassword"
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              requried
+              requried={true}
             />
-            <button class="button" type="submit">
+            <button className="button" type="submit">
               Sign Up
             </button>
             <button
-              class="button button-secondary"
+              className="button button-secondary"
               onClick={() => {
                 history.push("/");
               }}

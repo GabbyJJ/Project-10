@@ -61,17 +61,17 @@ const CourseDetail = () => {
     <div id="root">
       <Header />
       <main>
-        <div class="actions--bar">
-          <div class="wrap">
+        <div className="actions--bar">
+          <div className="wrap">
             {user && course && (
               <>
                 {user.id === course.User.id && (
                   <>
-                    <Link to={`/courses/${id}/update`} class="button">
+                    <Link to={`/courses/${id}/update`} className="button">
                       Update Course
                     </Link>
                     <button
-                      class="button"
+                      className="button"
                       onClick={() => {
                         deleteCourse();
                       }}
@@ -83,43 +83,43 @@ const CourseDetail = () => {
               </>
             )}
 
-            <Link class="button button-secondary" to={"/"}>
+            <Link className="button button-secondary" to={"/"}>
               Return to List
             </Link>
           </div>
         </div>
 
         {course && (
-          <div class="wrap">
+          <div className="wrap">
             <h2>Course Detail</h2>
             <form>
-              <div class="main--flex">
+              <div className="main--flex">
                 <div>
-                  <h3 class="course--detail--title">Course</h3>
-                  <h4 class="course--name">{course.title}</h4>
+                  <h3 className="course--detail--title">Course</h3>
+                  <h4 className="course--name">{course.title}</h4>
                   <p>
                     By {course.User.firstName} {course.User.lastName}
                   </p>
                   <ReactMarkdown children={course.description} />
                 </div>
                 <div>
-                  <h3 class="course--detail--title">Estimated Time</h3>
+                  <h3 className="course--detail--title">Estimated Time</h3>
                   <p>
                     {course.estimatedTime
                       ? course.estimatedTime
                       : "Estimated Time Not Provided"}
                   </p>
 
-                  <h3 class="course--detail--title">Materials Needed</h3>
-                  <p>
-                    {course.materialsNeeded ? (
-                      <ul class="course--detail--list">
-                        <ReactMarkdown children={course.materialsNeeded} />{" "}
-                      </ul>
-                    ) : (
-                      "No Materials Required"
-                    )}
-                  </p>
+                  <h3 className="course--detail--title">Materials Needed</h3>
+
+                  {course.materialsNeeded ? (
+                    <ReactMarkdown
+                      className="course--detail--list"
+                      children={course.materialsNeeded}
+                    />
+                  ) : (
+                    <p>No Materials Needed</p>
+                  )}
                 </div>
               </div>
             </form>

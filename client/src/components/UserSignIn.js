@@ -48,7 +48,7 @@ const UserSignIn = () => {
     <div>
       <Header />
       <main>
-        <div class="form--centered">
+        <div className="form--centered">
           <h2>Sign In</h2>
 
           <form
@@ -56,7 +56,7 @@ const UserSignIn = () => {
               signIn(e);
             }}
           >
-            <label for="emailAddress">Email Address</label>
+            <label htmlFor="emailAddress">Email Address</label>
             <input
               id="emailAddress"
               name="emailAddress"
@@ -64,7 +64,7 @@ const UserSignIn = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               id="password"
               name="password"
@@ -72,12 +72,12 @@ const UserSignIn = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button class="button" type="submit">
+            <button className="button" type="submit">
               {/* On submit the user will be signed in and the information will be pushed to the database */}
               Sign In
             </button>
             <button
-              class="button button-secondary"
+              className="button button-secondary"
               onClick={() => {
                 history.push("/");
               }}

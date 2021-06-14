@@ -53,11 +53,11 @@ const CreateCourse = () => {
     <div>
       <Header />
       <main>
-        <div class="wrap">
+        <div className="wrap">
           <h2>Create Course</h2>
 
           {errors && (
-            <div class="validation--errors">
+            <div className="validation--errors">
               <h3>Validation Errors</h3>
               <ul>
                 {/* map errors */}
@@ -67,14 +67,15 @@ const CreateCourse = () => {
             </div>
           )}
 
+          {/* This will create a course when submitted */}
           <form
             onSubmit={(e) => {
               createCourseData(e);
             }}
           >
-            <div class="main--flex">
+            <div className="main--flex">
               <div>
-                <label for="courseTitle">Course Title</label>
+                <label htmlFor="courseTitle">Course Title</label>
                 <input
                   id="courseTitle"
                   name="courseTitle"
@@ -89,7 +90,7 @@ const CreateCourse = () => {
                   By {user.firstName} {user.lastName}
                 </p>
 
-                <label for="courseDescription">Course Description</label>
+                <label htmlFor="courseDescription">Course Description</label>
                 <textarea
                   id="courseDescription"
                   name="courseDescription"
@@ -100,7 +101,7 @@ const CreateCourse = () => {
                 ></textarea>
               </div>
               <div>
-                <label for="estimatedTime">Estimated Time</label>
+                <label htmlFor="estimatedTime">Estimated Time</label>
                 <input
                   id="estimatedTime"
                   name="estimatedTime"
@@ -111,7 +112,7 @@ const CreateCourse = () => {
                   }}
                 />
 
-                <label for="materialsNeeded">Materials Needed</label>
+                <label htmlFor="materialsNeeded">Materials Needed</label>
                 <textarea
                   id="materialsNeeded"
                   name="materialsNeeded"
@@ -122,11 +123,11 @@ const CreateCourse = () => {
                 ></textarea>
               </div>
             </div>
-            <button class="button" type="submit">
+            <button className="button" type="submit">
               Create Course
             </button>
             <button
-              class="button button-secondary"
+              className="button button-secondary"
               onClick={() => {
                 history.push("/");
               }}

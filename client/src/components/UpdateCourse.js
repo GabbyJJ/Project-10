@@ -61,16 +61,16 @@ const UpdateCourse = () => {
       <main>
         {updateCourseData && (
           <>
-            <div class="wrap">
+            <div className="wrap">
               <h2>Update Course</h2>
               <form
                 onSubmit={(e) => {
                   updateData(e);
                 }}
               >
-                <div class="main--flex">
+                <div className="main--flex">
                   <div>
-                    <label for="courseTitle">Title</label>
+                    <label htmlFor="courseTitle">Title</label>
                     <input
                       id="courseTitle"
                       name="courseTitle"
@@ -87,7 +87,9 @@ const UpdateCourse = () => {
                       By {user.firstName} {user.lastName}
                     </p>
 
-                    <label for="courseDescription">Course Description</label>
+                    <label htmlFor="courseDescription">
+                      Course Description
+                    </label>
                     <textarea
                       id="courseDescription"
                       name="courseDescription"
@@ -101,7 +103,7 @@ const UpdateCourse = () => {
                     ></textarea>
                   </div>
                   <div>
-                    <label for="estimatedTime">Estimated Time</label>
+                    <label htmlFor="estimatedTime">Estimated Time</label>
                     <input
                       id="estimatedTime"
                       name="estimatedTime"
@@ -115,7 +117,7 @@ const UpdateCourse = () => {
                       }}
                     />
 
-                    <label for="materialsNeeded">Materials Needed</label>
+                    <label htmlFor="materialsNeeded">Materials Needed</label>
                     <textarea
                       id="materialsNeeded"
                       name="materialsNeeded"
@@ -129,11 +131,11 @@ const UpdateCourse = () => {
                     ></textarea>
                   </div>
                 </div>
-                <button class="button" type="submit">
+                <button className="button" type="submit">
                   Update Course
                 </button>
                 <button
-                  class="button button-secondary"
+                  className="button button-secondary"
                   onClick={() => {
                     history.push("/");
                   }}
