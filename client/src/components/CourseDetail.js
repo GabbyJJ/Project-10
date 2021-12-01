@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "./UserContext";
 import { Link, useParams, useHistory } from "react-router-dom";
 
 import Header from "./Header";
@@ -6,7 +7,8 @@ const ReactMarkdown = require("react-markdown");
 
 //Get course details and fetch api
 
-const CourseDetail = ({ user }) => {
+const CourseDetail = () => {
+  let [user] = useContext(UserContext);
   let { id } = useParams();
   let history = useHistory();
   let [course, setCourse] = React.useState(null);

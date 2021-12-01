@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "./UserContext";
 import Header from "./Header";
 import { Link, useHistory } from "react-router-dom";
 
-const UserSignUp = ({ user, onSignIn }) => {
+const UserSignUp = () => {
+  let [user, setUser] = useContext(UserContext);
   let history = useHistory();
   let [firstName, setFirstName] = React.useState("");
   let [lastName, setLastName] = React.useState("");
@@ -36,7 +38,7 @@ const UserSignUp = ({ user, onSignIn }) => {
         if (userData.errors) {
           return setErrors(userData.errors);
         }
-        onSignIn({
+        setUser({
           id: userData.id,
           firstName: userData.firstName,
           lastName: userData.lastName,

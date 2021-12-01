@@ -50,22 +50,17 @@ router.post("/", authenticateUser, (req, res) => {
 });
 
 router.put("/:id", authenticateUser, function (req, res, next) {
-  if (!req.body.title || !req.body.description) {
-    res.status(400);
-    res.json({ error: "you must supply a title or user" });
-    return;
-  }
   Course.findByPk(req.params.id)
     .then(function (course) {
       course
         .update(req.body)
-
-        .then((course) => {
-          res.status(204).json(course).end();
+        .then((courseData) => {
+          res.status(204);
+          res.json({}).end();
         })
-        .catch((error) => {
+        .catch((courseError) => {
           res.status(400);
-          res.json(error).end();
+          res.json(courseError).end();
         });
     })
     .catch((error) => {

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "./UserContext";
 import { useHistory } from "react-router-dom";
 
-const CreateCourse = ({ user }) => {
+const CreateCourse = () => {
+  let [user] = useContext(UserContext);
   let history = useHistory();
   let [errors, setErrors] = React.useState(null);
   let [title, setTitle] = React.useState("");
@@ -56,8 +58,8 @@ const CreateCourse = ({ user }) => {
               <h3>Validation Errors</h3>
               <ul>
                 {/* map errors */}
-                {errors.map((error) => {
-                  return <li>{error.message}</li>;
+                {errors.map((error, index) => {
+                  return <li key={index}>{error.message}</li>;
                 })}
               </ul>
             </div>

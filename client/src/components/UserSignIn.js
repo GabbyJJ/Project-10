@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "./UserContext";
 import Header from "./Header";
 import { Link, useHistory } from "react-router-dom";
 
-const UserSignIn = ({ user, onSignIn }) => {
+const UserSignIn = () => {
+  let [user, setUser] = useContext(UserContext);
   let history = useHistory();
 
   let [email, setEmail] = React.useState("");
   let [password, setPassword] = React.useState("");
-  let [errors, setErrors] = React.useState("");
+  let [errors, setErrors] = React.useState(null);
 
   // If the user has not filled out all fields they will get an error.
 
@@ -37,7 +39,7 @@ const UserSignIn = ({ user, onSignIn }) => {
           return setErrors(userData.errors);
         }
 
-        onSignIn({
+        setUser({
           id: userData.id,
           firstName: userData.firstName,
           lastName: userData.lastName,

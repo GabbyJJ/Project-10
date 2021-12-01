@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "./UserContext";
 import Header from "./Header";
 import { useHistory, useParams } from "react-router-dom";
 
-const UpdateCourse = ({ user }) => {
+const UpdateCourse = () => {
+  let [user] = useContext(UserContext);
   let { id } = useParams();
   let history = useHistory();
   let [errors, setErrors] = React.useState(null);
@@ -48,10 +50,22 @@ const UpdateCourse = ({ user }) => {
       },
       body: JSON.stringify(updateCourseData),
     })
-      .then(() => {
-        history.push(`/courses/${id}`);
+      .then((res) => {
+        if (res.status !== 204) {
+          return res.json();
+        }
+        return res.text();
       })
-      .catch((error) => {});
+      .then((data) => {
+        if (typeof data === "object" && data.errors) {
+          return setErrors(data.errors);
+        } else {
+          history.push(`/courses/${id}`);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   return (
@@ -67,8 +81,8 @@ const UpdateCourse = ({ user }) => {
                   <h3>Validation Errors</h3>
                   <ul>
                     {/* map errors */}
-                    {errors.map((error) => {
-                      return <li>{error.message}</li>;
+                    {errors.map((error, index) => {
+                      return <li key={index}>{error.message}</li>;
                     })}
                   </ul>
                 </div>

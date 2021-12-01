@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "./UserContext";
 import { Link } from "react-router-dom";
 
 //This is the variable to set my Header
 
-const Header = ({ user }) => {
+const Header = () => {
+  let [user] = useContext(UserContext);
   return (
     <header>
       <div className="wrap header--flex">
