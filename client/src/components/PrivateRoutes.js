@@ -1,9 +1,11 @@
-import React from "react";
-import { Redirect } from "react-router-dom";
-
-const PrivateRoutes = ({ children }) => {
-  let user = JSON.parse(localStorage.getItem("user"));
-  return user ? children : <Redirect to={"/signin"} />;
+import { Route, Redirect } from "react-router-dom";
+const PrivateRoutes = ({ children, user, ...otherProps }) => {
+  return (
+    <Route
+      {...otherProps}
+      render={(props) => (user !== null ? children : <Redirect to="/signin" />)}
+    />
+  );
 };
 
 export default PrivateRoutes;

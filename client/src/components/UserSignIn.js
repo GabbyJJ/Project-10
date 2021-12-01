@@ -2,19 +2,18 @@ import React from "react";
 import Header from "./Header";
 import { Link, useHistory } from "react-router-dom";
 
-const UserSignIn = () => {
+const UserSignIn = ({ user, onSignIn }) => {
   let history = useHistory();
 
   let [email, setEmail] = React.useState("");
   let [password, setPassword] = React.useState("");
+  let [errors, setErrors] = React.useState("");
 
   // If the user has not filled out all fields they will get an error.
 
   const signIn = (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      return alert("All Fields Are Required");
-    }
+
     fetch(`http://localhost:5000/api/users`, {
       method: "GET",
       mode: "cors",
@@ -24,33 +23,50 @@ const UserSignIn = () => {
       },
     })
       .then((res) => {
-        console.log(res);
+        if (res.status === 401) {
+          return setErrors([
+            {
+              message: "User Name or Password is incorrect",
+            },
+          ]);
+        }
         return res.json();
       })
       .then((userData) => {
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            id: userData.id,
-            firstName: userData.firstName,
-            lastName: userData.lastName,
-            email: userData.emailAddress,
-            password: password,
-          })
-        );
+        if (userData.errors) {
+          return setErrors(userData.errors);
+        }
+
+        onSignIn({
+          id: userData.id,
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          email: userData.emailAddress,
+          password: password,
+        });
+
         history.push("/");
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
   return (
     <div>
-      <Header />
+      <Header user={user} />
+
       <main>
         <div className="form--centered">
           <h2>Sign In</h2>
-
+          {errors && (
+            <div className="validation--errors">
+              <h3>Validation Errors</h3>
+              <ul>
+                {/* map errors */}
+                {errors.map((error) => {
+                  return <li>{error.message}</li>;
+                })}
+              </ul>
+            </div>
+          )}
           <form
             onSubmit={(e) => {
               signIn(e);

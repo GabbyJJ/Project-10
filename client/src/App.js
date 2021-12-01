@@ -15,17 +15,30 @@ import PrivateRoutes from "./components/PrivateRoutes";
 //Set exact paths
 
 const App = () => {
+  let [user, setUser] = React.useState(null);
   return (
     <Router>
-      <Route exact path="/" component={Courses} />
-      <Route exact path="/courses/:id" component={CourseDetail} />
-      <Route exact path="/signin" component={UserSignIn} />
-      <Route exact path="/signup" component={UserSignUp} />
-      <Route exact path="/signout" component={UserSignOut} />
-      <PrivateRoutes>
-        <Route exact path="/courses/create" component={CreateCourse} />
-        <Route exact path="/courses/:id/update" component={UpdateCourse} />
+      <Route exact path="/">
+        <Courses user={user} />
+      </Route>
+      <Route exact path="/courses/:id">
+        <CourseDetail user={user} />
+      </Route>
+      <PrivateRoutes exact path="/courses/create" user={user}>
+        <CreateCourse user={user} />
       </PrivateRoutes>
+      <PrivateRoutes exact path="/courses/:id/update" user={user}>
+        <UpdateCourse user={user} />
+      </PrivateRoutes>
+      <Route exact path="/signup">
+        <UserSignUp onSignIn={(userData) => setUser(userData)} user={user} />
+      </Route>
+      <Route exact path="/signout">
+        <UserSignOut onSignOut={() => setUser(null)} user={user} />
+      </Route>
+      <Route exact path="/signin">
+        <UserSignIn onSignIn={(userData) => setUser(userData)} user={user} />
+      </Route>
       <Redirect from="*" to="/" />
     </Router>
   );

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 //This variable is to set the courses and fetch the api
 
-const Courses = () => {
+const Courses = ({ user }) => {
   let [courses, setCourses] = React.useState(null);
   // useEffect allows us to run things when the component is loaded into the DOM
   React.useEffect(() => {
@@ -21,22 +21,19 @@ const Courses = () => {
       },
     })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .then((courses) => {
         // set data in state using React.useState()
-        console.log(courses);
+
         setCourses(courses);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   return (
     <div id="root">
-      <Header />
+      <Header user={user} />
       <main>
         <div className="wrap main--grid">
           {courses &&

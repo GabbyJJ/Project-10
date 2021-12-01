@@ -33,20 +33,14 @@ app.use("/api/courses", courseRouter);
 
 sequelize
   .authenticate()
-  .then(() => {
-    console.log("Connection has been established successfully.");
-  })
+  .then(() => {})
   .catch((error) => {
     console.error("Unable to connect to the database:", err);
   });
 sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log(`Databases have synced`);
-  })
-  .catch((error) => {
-    console.log(`There was an error syncing the database: ${error}`);
-  });
+  .sync()
+  .then(() => {})
+  .catch((error) => {});
 // this will send a 404 message if no other route matched
 app.use((req, res) => {
   res.status(404).json({
@@ -70,6 +64,4 @@ app.use((err, req, res, next) => {
 app.set("port", process.env.PORT || 5000);
 
 // start listening on the port
-const server = app.listen(app.get("port"), () => {
-  console.log(`Express server is listening on port ${server.address().port}`);
-});
+const server = app.listen(app.get("port"), () => {});

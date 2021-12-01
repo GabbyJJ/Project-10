@@ -6,7 +6,6 @@ const { User } = require("../models");
 exports.authenticateUser = async (req, res, next) => {
   let message;
   const credentials = auth(req);
-  console.log(credentials);
 
   // This will authenticate the User by email address.
   if (credentials) {
@@ -20,7 +19,6 @@ exports.authenticateUser = async (req, res, next) => {
       );
       //If the authentication is true it will be successful.
       if (authenticated) {
-        console.log(`Authentication successful for ${user.email}`);
         req.currentUser = user;
         //If authentication is the true alerts will not allow the user to submit.
       } else {

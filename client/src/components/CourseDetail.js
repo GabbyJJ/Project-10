@@ -6,10 +6,9 @@ const ReactMarkdown = require("react-markdown");
 
 //Get course details and fetch api
 
-const CourseDetail = () => {
+const CourseDetail = ({ user }) => {
   let { id } = useParams();
   let history = useHistory();
-  let user = JSON.parse(localStorage.getItem("user"));
   let [course, setCourse] = React.useState(null);
 
   React.useEffect(() => {
@@ -22,18 +21,20 @@ const CourseDetail = () => {
       },
     })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .then((course) => {
         // set data in state using React.useState()
-        console.log(course);
+
         setCourse(course);
       })
       .catch((error) => {
-        console.log(error);
+        history.push("/");
       });
-  }, [id]);
+    return () => {
+      setCourse(null);
+    };
+  }, [id, history]);
 
   const deleteCourse = () => {
     if (!user) {
@@ -52,14 +53,12 @@ const CourseDetail = () => {
       .then((course) => {
         history.push("/");
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
   //This will link to the update course page and this also activates the delete button.
   return (
     <div id="root">
-      <Header />
+      <Header user={user} />
       <main>
         <div className="actions--bar">
           <div className="wrap">

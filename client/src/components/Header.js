@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 
 //This is the variable to set my Header
 
-const Header = () => {
-  let user = JSON.parse(localStorage.getItem("user"));
+const Header = ({ user }) => {
   return (
     <header>
       <div className="wrap header--flex">

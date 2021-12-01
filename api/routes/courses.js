@@ -12,12 +12,10 @@ router.get("/", (req, res) => {
     ],
   })
     .then((data) => {
-      console.log(data);
       res.status(200);
       res.json(data);
     })
     .catch((error) => {
-      console.log(error);
       res.status(400).json(error);
     });
 });
@@ -35,20 +33,17 @@ router.get("/:id", (req, res) => {
       res.status(200).json(course).end();
     })
     .catch((error) => {
-      console.log(error);
       res.status(400);
       res.json(error).end();
     });
 });
 
 router.post("/", authenticateUser, (req, res) => {
-  console.log(req.body);
   Course.create(req.body)
     .then((course) => {
       res.status(201).json(course).end();
     })
     .catch((error) => {
-      console.log(error);
       res.status(400);
       res.json(error).end();
     });

@@ -1,10 +1,8 @@
 import React from "react";
-import Header from "./Header";
 import { useHistory } from "react-router-dom";
 
-const CreateCourse = () => {
+const CreateCourse = ({ user }) => {
   let history = useHistory();
-  let user = JSON.parse(localStorage.getItem("user"));
   let [errors, setErrors] = React.useState(null);
   let [title, setTitle] = React.useState("");
   let [description, setDescription] = React.useState("");
@@ -16,10 +14,6 @@ const CreateCourse = () => {
   const createCourseData = (e) => {
     e.preventDefault();
     setErrors(null);
-
-    if (!user) {
-      return "You must be signed in to create a course";
-    }
 
     fetch(`http://localhost:5000/api/courses`, {
       method: "POST",
@@ -41,17 +35,18 @@ const CreateCourse = () => {
         return res.json();
       })
       .then((course) => {
+        if (course.errors) {
+          return setErrors(course.errors);
+        }
         history.push(`/courses/${course.id}`);
       })
       .catch((error) => {
-        console.log(error);
         setErrors(error);
       });
   };
 
   return (
     <div>
-      <Header />
       <main>
         <div className="wrap">
           <h2>Create Course</h2>
@@ -61,8 +56,9 @@ const CreateCourse = () => {
               <h3>Validation Errors</h3>
               <ul>
                 {/* map errors */}
-                <li>Please provide a value for "Title"</li>
-                <li>Please provide a value for "Description"</li>
+                {errors.map((error) => {
+                  return <li>{error.message}</li>;
+                })}
               </ul>
             </div>
           )}
@@ -85,10 +81,6 @@ const CreateCourse = () => {
                     setTitle(e.target.value);
                   }}
                 />
-
-                <p>
-                  By {user.firstName} {user.lastName}
-                </p>
 
                 <label htmlFor="courseDescription">Course Description</label>
                 <textarea

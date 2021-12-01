@@ -2,10 +2,10 @@ import React from "react";
 import Header from "./Header";
 import { useHistory, useParams } from "react-router-dom";
 
-const UpdateCourse = () => {
+const UpdateCourse = ({ user }) => {
   let { id } = useParams();
   let history = useHistory();
-  let user = JSON.parse(localStorage.getItem("user"));
+  let [errors, setErrors] = React.useState(null);
   let [updateCourseData, setUpdateCourseData] = React.useState("");
 
   React.useEffect(() => {
@@ -18,17 +18,18 @@ const UpdateCourse = () => {
       },
     })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .then((course) => {
         // set data in state using React.useState()
-        console.log(course);
+
         setUpdateCourseData(course);
       })
       .catch((error) => {
-        console.log(error);
+        setErrors(error);
       });
+
+    return () => {};
   }, [id]);
 
   const updateData = (e) => {
@@ -50,19 +51,28 @@ const UpdateCourse = () => {
       .then(() => {
         history.push(`/courses/${id}`);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   return (
     <div>
-      <Header />
+      <Header user={user} />
       <main>
         {updateCourseData && (
           <>
             <div className="wrap">
               <h2>Update Course</h2>
+              {errors && (
+                <div className="validation--errors">
+                  <h3>Validation Errors</h3>
+                  <ul>
+                    {/* map errors */}
+                    {errors.map((error) => {
+                      return <li>{error.message}</li>;
+                    })}
+                  </ul>
+                </div>
+              )}
               <form
                 onSubmit={(e) => {
                   updateData(e);
@@ -137,7 +147,7 @@ const UpdateCourse = () => {
                 <button
                   className="button button-secondary"
                   onClick={() => {
-                    history.push("/");
+                    history.push(`/courses/${id}`);
                   }}
                 >
                   Cancel
